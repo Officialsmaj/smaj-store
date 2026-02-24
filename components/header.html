@@ -1,0 +1,92 @@
+<header class="site-header">
+  <div class="header-inner container">
+    <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-label="Open menu">
+      <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M6 6l12 12M18 6l-12 12"></path>
+      </svg>
+    </button>
+
+    <a class="logo" href="index.html" aria-label="SMAJ STORE Home">
+      <img src="assets/images/logo.png" alt="SMAJ STORE logo" />
+      <span>SMAJ STORE</span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="marketplace.html">Marketplace</a>
+      <div class="dropdown">
+        <button class="dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">Categories</button>
+        <div class="dropdown-menu">
+          <a href="products.html?category=electronics">Electronics</a>
+          <a href="products.html?category=general">General</a>
+          <a href="products.html?category=digital">Digital Goods</a>
+          <a href="products.html">All Categories</a>
+        </div>
+      </div>
+      <a href="products.html?category=services">Services</a>
+      <a href="dashboard/orders.html" data-orders-link-main>Orders</a>
+      <a href="index.html#support">Support</a>
+    </nav>
+
+    <div class="nav-right">
+      <button class="search-toggle" type="button" data-search-toggle aria-expanded="false" aria-label="Open search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="M20 20l-3.5-3.5"></path>
+        </svg>
+      </button>
+
+      <div class="search-bar" role="search" data-search-bar>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="M20 20l-3.5-3.5"></path>
+        </svg>
+        <input type="search" data-global-search placeholder="Search products, vendors, services" />
+      </div>
+
+      <button class="cart-button" type="button" data-open-cart aria-label="View cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M6 6h15l-1.5 9h-11z"></path>
+          <circle cx="9" cy="20" r="1"></circle>
+          <circle cx="18" cy="20" r="1"></circle>
+        </svg>
+        <span class="cart-badge" data-cart-count>0</span>
+      </button>
+
+      <div class="wallet-status" data-wallet-status>
+        <span class="wallet-dot" aria-hidden="true"></span>
+        <span class="wallet-state">Connected</span>
+        <strong data-wallet-short>-</strong>
+      </div>
+
+      <div class="user-menu" data-user-menu>
+        <button class="user-toggle" type="button" data-user-toggle aria-expanded="false">
+          <svg class="wallet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="7" width="18" height="12" rx="2"></rect>
+            <path d="M17 12h3"></path>
+          </svg>
+          <span class="user-toggle-label">Profile</span>
+        </button>
+        <div class="user-dropdown" data-user-dropdown>
+          <a href="dashboard/profile.html" data-profile-link>Profile</a>
+          <a href="dashboard/orders.html" data-orders-link>Orders</a>
+          <a href="dashboard/index.html" data-dashboard-link>Dashboard</a>
+          <a href="index.html" id="logoutLink">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-overlay" data-menu-overlay></div>
+<div class="nav-mobile-panel" data-mobile-panel>
+  <a href="index.html">Home</a>
+  <a href="marketplace.html">Marketplace</a>
+  <a href="products.html">Categories</a>
+  <a href="products.html?category=services">Services</a>
+  <a href="dashboard/orders.html" data-orders-link-main-mobile>Orders</a>
+  <a href="index.html#support">Support</a>
+</div>

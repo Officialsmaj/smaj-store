@@ -1,0 +1,45 @@
+@import url("./header.css");
+@import url("./footer.css");
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem;
+  box-shadow: var(--shadow);
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-primary { background: var(--primary); color: var(--white); }
+.btn-primary:hover { background: var(--primary-dark); text-decoration: none; }
+.btn-secondary { background: #fff; border-color: var(--border); color: var(--text); }
+.form { display: grid; gap: 0.8rem; }
+.form label { display: grid; gap: 0.4rem; font-weight: 600; }
+.form input, .form textarea {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+}
+.check { font-weight: 500; display: flex; align-items: center; gap: 0.55rem; }
+.verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: 0.4rem;
+  color: var(--verified);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { border-bottom: 1px solid var(--border); text-align: left; padding: 0.75rem 0.4rem; }
+.actions-inline { display: flex; gap: 0.45rem; flex-wrap: wrap; }

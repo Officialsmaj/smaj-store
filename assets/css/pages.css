@@ -1,0 +1,105 @@
+.eyebrow { text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-size: 0.78rem; font-weight: 700; }
+.lead { color: var(--muted); }
+.hint { color: var(--muted); font-size: 0.9rem; margin-top: 0.5rem; }
+
+.home-hero {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background:
+    radial-gradient(circle at 12% 10%, rgba(125, 60, 255, 0.18), transparent 42%),
+    radial-gradient(circle at 88% 20%, rgba(11, 15, 26, 0.12), transparent 34%),
+    #ffffff;
+  padding: 56px 36px;
+}
+
+.home-hero h1 {
+  margin: 10px 0 12px;
+  font-size: clamp(1.9rem, 4.2vw, 3rem);
+  line-height: 1.2;
+}
+
+.home-hero-actions {
+  margin-top: 20px;
+}
+
+.home-section {
+  margin-top: 26px;
+}
+
+.home-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.home-rate {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.home-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 16px;
+}
+
+.home-categories span {
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.home-product-card .home-category {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.home-product-card .home-copy {
+  color: var(--muted);
+  min-height: 48px;
+}
+
+.home-product-card .home-price {
+  font-size: 1.06rem;
+  font-weight: 700;
+  margin: 8px 0 14px;
+}
+
+.home-product-card .home-price span {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.home-vendor {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #ffffff;
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+.home-testimonials .card p {
+  margin-top: 0;
+  font-style: italic;
+}
+
+@media (max-width: 720px) {
+  .home-hero {
+    padding: 30px 20px;
+  }
+}

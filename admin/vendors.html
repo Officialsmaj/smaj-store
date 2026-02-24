@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" data-root="..">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMAJ STORE | Admin Vendors</title>
+  <link rel="stylesheet" href="../assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/layout.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
+  <link rel="stylesheet" href="../assets/css/pages.css" />
+  <link rel="stylesheet" href="../assets/css/responsive.css" />
+</head>
+<body data-page="adminVendors" data-requires-auth="true" data-allowed-roles="admin">
+  <div data-include="../components/header.html"></div>
+  <main class="page container">
+    <h1>Admin: Vendors</h1>
+    <div class="card">
+      <table class="table">
+        <thead><tr><th>Vendor</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>SMAJ Traders</td>
+            <td>pending</td>
+            <td class="actions-inline">
+              <button class="btn btn-secondary" data-admin-action="approve">Approve</button>
+              <button class="btn btn-secondary" data-admin-action="reject">Reject</button>
+              <button class="btn btn-secondary" data-admin-action="remove">Remove</button>
+              <button class="btn btn-secondary" data-admin-action="badge-on">Give Badge</button>
+              <button class="btn btn-secondary" data-admin-action="badge-off">Remove Badge</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <div data-include="../components/footer.html"></div>
+  <script src="../assets/js/auth-client.js"></script>
+  <script src="../assets/js/router-guard.js"></script>
+  <script src="../assets/js/admin-ui.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" data-root=".">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMAJ STORE | Marketplace Home</title>
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/pages.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+</head>
+<body data-page="home">
+  <div data-include="components/header.html"></div>
+  <main class="page container">
+    <section class="hero home-hero">
+      <p class="eyebrow">SMAJ STORE x SMAJ PI HUB</p>
+      <h1>Buy and sell inside one verified Pi-native marketplace.</h1>
+      <p>Wallet session is inherited from SMAJ PI HUB so checkout and vendor actions are seamless.</p>
+      <div class="actions home-hero-actions">
+        <a class="btn btn-primary" href="marketplace.html">Shop Now</a>
+        <a class="btn btn-secondary" href="#vendorFormWrap">Become a Vendor</a>
+      </div>
+    </section>
+
+    <section class="home-section" id="marketplace">
+      <div class="home-section-head">
+        <div>
+          <p class="eyebrow">Buyer Section</p>
+          <h2>Featured Products & Services</h2>
+        </div>
+        <p class="home-rate">Current Pi rate: <strong data-pi-rate>$314,159</strong> per 1 Pi</p>
+      </div>
+      <div class="home-categories">
+        <span>Electronics</span>
+        <span>Digital Services</span>
+        <span>Freelancers</span>
+        <span>General</span>
+      </div>
+      <div class="grid grid-3" id="homeFeaturedProducts"></div>
+    </section>
+
+    <section class="home-section home-vendor">
+      <p class="eyebrow">Vendor Section</p>
+      <h2>Grow your business with SMAJ STORE.</h2>
+      <p>List products, receive Pi payments, and manage orders with role-based tools.</p>
+      <div class="actions" id="vendorCtaArea"></div>
+      <div class="card" id="vendorFormWrap">
+        <h3>Apply to Become a Vendor</h3>
+        <p class="hint">Application uses your current SMAJ PI HUB session and requires manual admin approval.</p>
+        <form id="vendorApplicationForm" class="stack-form">
+          <label>
+            Store Name
+            <input id="storeName" type="text" placeholder="Your store name" required />
+          </label>
+          <label>
+            What will you sell?
+            <textarea id="storeDescription" rows="4" placeholder="Products or services"></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit">Submit Application</button>
+        </form>
+        <p class="hint" id="vendorFormState"></p>
+      </div>
+    </section>
+
+    <section class="home-section">
+      <p class="eyebrow">Features & Benefits</p>
+      <div class="grid grid-3">
+        <article class="card">
+          <h3>Trusted Pi Pricing</h3>
+          <p>Every listing shows USD and Pi values. Cart and checkout preserve both prices.</p>
+        </article>
+        <article class="card">
+          <h3>Role-Based Experience</h3>
+          <p>Buyers, vendors, and admins get tailored actions using one ecosystem session.</p>
+        </article>
+        <article class="card">
+          <h3>Manual Vendor Approval</h3>
+          <p>New vendor applications are reviewed before storefront access is granted.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="home-section home-testimonials">
+      <p class="eyebrow">Testimonials</p>
+      <div class="grid grid-3">
+        <article class="card">
+          <p>"Checkout in Pi is clear and fast. Seeing USD and Pi together builds trust."</p>
+          <strong>Buyer, Accra</strong>
+        </article>
+        <article class="card">
+          <p>"Vendor onboarding through SMAJ PI HUB session removed friction for our team."</p>
+          <strong>Vendor, Lagos</strong>
+        </article>
+        <article class="card">
+          <p>"The dashboard and order flow are practical for daily operations."</p>
+          <strong>Merchant, Nairobi</strong>
+        </article>
+      </div>
+    </section>
+  </main>
+  <div data-include="components/footer.html"></div>
+  <script src="assets/js/auth-client.js"></script>
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/api-client.js"></script>
+  <script src="assets/js/router-guard.js"></script>
+  <script src="assets/js/home-page.js"></script>
+  <script src="assets/js/ui-components.js"></script>
+  <script src="assets/js/vendor-flow.js"></script>
+  <script src="assets/js/admin-ui.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

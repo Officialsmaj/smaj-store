@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" data-root=".">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMAJ STORE | Checkout</title>
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/pages.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+</head>
+<body data-page="checkout" data-requires-auth="true" data-allowed-roles="buyer,vendor,admin">
+  <div data-include="components/header.html"></div>
+  
+  <main class="page container">
+    <section class="hero home-hero">
+      <p class="eyebrow">Checkout and Escrow</p>
+      <h1 class="display">Pay in Pi</h1>
+      <p class="lead">Verify payment, create order, and distribute commission automatically.</p>
+    </section>
+
+    <section class="home-section top-tight">
+      <div class="grid grid-2">
+        <div class="card" id="checkoutSummary">
+          <h3>Order Summary</h3>
+          <div id="checkoutSummaryContent"></div>
+        </div>
+        <div class="card" id="paymentInstructions">
+          <h3>Payment Instructions</h3>
+          <div id="paymentInstructionsContent"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-section top-tight">
+      <div class="card">
+        <button class="btn btn-primary" id="verifyPaymentBtn" type="button">Verify Payment and Create Order</button>
+        <div class="result-wrap" id="checkoutResult"></div>
+      </div>
+    </section>
+  </main>
+  
+  <div data-include="components/footer.html"></div>
+  
+  <script src="assets/js/auth-client.js"></script>
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/router-guard.js"></script>
+  <script src="assets/js/ui-components.js"></script>
+  <script src="assets/js/vendor-flow.js"></script>
+  <script src="assets/js/admin-ui.js"></script>
+  <script src="assets/js/checkout-page.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" data-root=".">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMAJ STORE | Buyer Dashboard</title>
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/pages.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+</head>
+<body data-page="buyerDashboard" data-requires-auth="true" data-allowed-roles="buyer">
+  <div data-include="components/header.html"></div>
+  
+  <main class="page container">
+    <section class="hero home-hero">
+      <p class="eyebrow">Buyer Role</p>
+      <h1 class="display">Buyer Dashboard</h1>
+      <p class="lead">Orders, cart, wishlist, and profile managed in one view.</p>
+    </section>
+
+    <section class="home-section top-tight">
+      <div class="grid grid-2">
+        <div class="card" id="profile">
+          <h3>Profile</h3>
+          <div id="buyerProfile"></div>
+        </div>
+        <div class="card" id="orders">
+          <h3>Orders</h3>
+          <div id="buyerOrders"></div>
+        </div>
+        <div class="card">
+          <h3>Cart</h3>
+          <div id="buyerCart"></div>
+        </div>
+        <div class="card">
+          <h3>Wishlist</h3>
+          <div id="buyerWishlist"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <div data-include="components/footer.html"></div>
+  
+  <script src="assets/js/auth-client.js"></script>
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/router-guard.js"></script>
+  <script src="assets/js/ui-components.js"></script>
+  <script src="assets/js/vendor-flow.js"></script>
+  <script src="assets/js/admin-ui.js"></script>
+  <script src="assets/js/dashboard-page.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
