@@ -25,8 +25,6 @@ function updateWalletUI(sessionData) {
     const walletInfo = document.getElementById('walletInfo');
     const walletBalance = document.getElementById('walletBalance');
     const walletAddress = document.getElementById('walletAddress');
-    const heroWalletIndicator = document.getElementById('heroWalletIndicator');
-    const heroAddress = document.getElementById('heroAddress');
     const connectBtn = document.querySelector('.connect-btn');
     
     if (walletStatus) {
@@ -48,14 +46,6 @@ function updateWalletUI(sessionData) {
     if (walletAddress && sessionData.walletAddress) {
         const address = sessionData.walletAddress;
         walletAddress.textContent = address.substring(0, 8) + '...' + address.substring(address.length - 6);
-    }
-    
-    if (heroWalletIndicator) {
-        heroWalletIndicator.style.display = 'flex';
-    }
-    
-    if (heroAddress && sessionData.walletAddress) {
-        heroAddress.textContent = sessionData.walletAddress.substring(0, 8) + '...';
     }
     
     if (connectBtn) {
@@ -87,7 +77,6 @@ function disconnectWallet() {
     const walletStatus = document.getElementById('walletStatus');
     const walletText = document.querySelector('.wallet-text');
     const walletInfo = document.getElementById('walletInfo');
-    const heroWalletIndicator = document.getElementById('heroWalletIndicator');
     const connectBtn = document.querySelector('.connect-btn');
     
     if (walletStatus) {
@@ -100,10 +89,6 @@ function disconnectWallet() {
     
     if (walletInfo) {
         walletInfo.style.display = 'none';
-    }
-    
-    if (heroWalletIndicator) {
-        heroWalletIndicator.style.display = 'none';
     }
     
     if (connectBtn) {
