@@ -124,9 +124,7 @@ function copyAddress() {
 
 // Return to SMAJ PI HUB
 function returnToHub() {
-    // In production, this would redirect to the actual PI HUB
-    showNotification('Redirecting to SMAJ PI HUB...', 'info');
-    // window.location.href = '../hub/index.html';
+    window.location.href = 'https://officialsmaj.github.io/smajpihub/';
 }
 
 // Toggle profile menu
