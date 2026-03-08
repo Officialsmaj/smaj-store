@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | SMAJ STORE</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="../logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+        .checkout-layout { display: grid; grid-template-columns: 1fr 400px; gap: 32px; }
+        .checkout-form h2 { font-size: 24px; font-weight: 700; margin-bottom: 24px; }
+        .form-section { background: var(--bg-white); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 24px; }
+        .form-section h3 { font-size: 18px; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+        .form-section h3 i { color: var(--primary-color); }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 8px; }
+        .form-group input, .form-group select { width: 100%; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); font-size: 14px; outline: none; transition: var(--transition-fast); }
+        .form-group input:focus, .form-group select:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .wallet-status-box { display: flex; align-items: center; gap: 16px; padding: 16px; background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success-color); border-radius: var(--radius-md); margin-bottom: 20px; }
+        .wallet-status-box i { font-size: 24px; color: var(--success-color); }
+        .wallet-status-box .info { flex: 1; }
+        .wallet-status-box .info strong { display: block; color: var(--success-color); }
+        .wallet-status-box .info span { font-size: 13px; color: var(--text-secondary); }
+        .order-summary { background: var(--bg-white); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; height: fit-content; position: sticky; top: 100px; }
+        .order-summary h3 { font-size: 18px; font-weight: 600; margin-bottom: 20px; }
+        .order-items { max-height: 300px; overflow-y: auto; margin-bottom: 20px; }
+        .order-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border-color); }
+        .order-item:last-child { border-bottom: none; }
+        .order-item-image { width: 60px; height: 60px; object-fit: cover; border-radius: var(--radius-md); }
+        .order-item-details { flex: 1; }
+        .order-item-details h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .order-item-details span { font-size: 12px; color: var(--text-secondary); }
+        .order-item-price { font-weight: 600; color: var(--primary-color); }
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px; color: var(--text-secondary); }
+        .summary-row.total { padding-top: 16px; border-top: 1px solid var(--border-color); font-size: 18px; font-weight: 700; color: var(--text-primary); margin-top: 16px; }
+        .summary-row.total span:last-child { color: var(--primary-color); font-size: 24px; }
+        .escrow-box { display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: rgba(59, 130, 246, 0.1); border: 1px solid var(--info-color); border-radius: var(--radius-md); margin: 20px 0; }
+        .escrow-box i { color: var(--info-color); font-size: 20px; margin-top: 2px; }
+        .escrow-box p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+        .place-order-btn { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); color: var(--text-white); border-radius: var(--radius-md); font-size: 16px; font-weight: 600; transition: var(--transition-fast); }
+        .place-order-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        .payment-methods { display: flex; gap: 12px; margin-bottom: 20px; }
+        .payment-option { flex: 1; padding: 16px; border: 2px solid var(--border-color); border-radius: var(--radius-md); text-align: center; cursor: pointer; transition: var(--transition-fast); }
+        .payment-option:hover, .payment-option.active { border-color: var(--primary-color); background: rgba(99, 102, 241, 0.05); }
+        .payment-option i { font-size: 24px; color: var(--primary-color); margin-bottom: 8px; }
+        .payment-option span { display: block; font-size: 13px; font-weight: 500; }
+        @media (max-width: 1024px) { .checkout-layout { grid-template-columns: 1fr; } .order-summary { position: static; } }
+    </style>
+</head>
+<body>
+    <header class="ecosystem-header">
+        <div class="header-left">
+            <a href="../index.html" class="back-to-hub"><i class="fas fa-arrow-left"></i><span>Back to PI HUB</span></a>
+            <div class="store-logo"><img src="../logo.png" alt="SMAJ STORE"><span>SMAJ STORE</span></div>
+        <div class="header-right">
+            <div class="wallet-status" id="walletStatus">
+                <span class="wallet-text" onclick="toggleWalletDropdown()"><i class="fas fa-wallet"></i><span>Connect Wallet</span>
+                <div class="wallet-dropdown" id="walletDropdown">
+                    <div class="wallet-info" id="walletInfo" style="display: none;">
+                        <div class="wallet-balance"><span class="balance-label">Balance</span><span class="balance-amount" id="walletBalance">0.00 Pi</span></div>
+                        <button class="disconnect-btn" onclick="disconnectWallet()">Disconnect</button>
+                    </div>
+                    <button class="connect-btn" onclick="connectWallet()">Connect Pi Wallet</button>
+                </div>
+            <a href="cart.html" class="header-icon cart-icon"><i class="fas fa-shopping-cart"></i><span class="cart-count" id="cartCount">0</span></a>
+        </div>
+    </header>
+
+    <div class="page-container">
+        <h2 style="margin-bottom: 24px;">Checkout</h2>
+        <div class="checkout-layout">
+            <div class="checkout-form">
+                <div class="form-section">
+                    <h3><i class="fas fa-wallet"></i> Payment Method</h3>
+                    <div class="wallet-status-box" id="walletBox"><i class="fas fa-check-circle"></i><div class="info"><strong>Wallet Connected</strong><span id="walletAddressDisplay">**** **** **** ****</span></div>
+                    <div class="payment-methods">
+                        <div class="payment-option active"><i class="fas fa-coins"></i><span>Pi Wallet</span></div>
+                        <div class="payment-option"><i class="fas fa-token"></i><span>SMAJ Token</span></div>
+                </div>
+                <div class="form-section">
+                    <h3><i class="fas fa-shipping-fast"></i> Shipping Address</h3>
+                    <div class="form-row">
+                        <div class="form-group"><label>First Name</label><input type="text" id="firstName" placeholder="John"></div>
+                        <div class="form-group"><label>Last Name</label><input type="text" id="lastName" placeholder="Doe"></div>
+                    <div class="form-group"><label>Street Address</label><input type="text" id="address" placeholder="123 Main Street"></div>
+                    <div class="form-row">
+                        <div class="form-group"><label>City</label><input type="text" id="city" placeholder="New York"></div>
+                        <div class="form-group"><label>Postal Code</label><input type="text" id="postalCode" placeholder="10001"></div>
+                </div>
+                <div class="form-section">
+                    <h3><i class="fas fa-truck"></i> Delivery Option</h3>
+                    <div class="form-group">
+                        <select id="deliveryOption">
+                            <option value="standard">Standard Delivery - 5-7 days (Free orders >100 Pi)</option>
+                            <option value="express">Express Delivery - 2-3 days (+9.99 Pi)</option>
+                            <option value="priority">Priority Delivery - Next day (+19.99 Pi)</option>
+                        </select>
+                    </div>
+            </div>
+            <div class="order-summary">
+                <h3>Order Summary</h3>
+                <div class="order-items" id="orderItems"></div>
+                <div class="summary-row"><span>Subtotal</span><span id="orderSubtotal">0.00 Pi</span></div>
+                <div class="summary-row"><span>Delivery</span><span id="orderDelivery">0.00 Pi</span></div>
+                <div class="summary-row"><span>Escrow Fee</span><span>FREE</span></div>
+                <div class="summary-row total"><span>Total</span><span id="orderTotal">0.00 Pi</span></div>
+                <div class="escrow-box"><i class="fas fa-shield-alt"></i><p>Your payment will be held in escrow until you confirm delivery.</p></div>
+                <button class="place-order-btn" onclick="placeOrder()"><i class="fas fa-lock"></i> Place Order</button>
+            </div>
+    </div>
+
+    <script src="../js/products.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        let cart = JSON.parse(localStorage.getItem('smaj_cart') || '[]');
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            checkEcosystemSession();
+            loadOrderSummary();
+            const session = getEcosystemSession();
+            if (!session || !session.connected) showNotification('Please connect your wallet to continue', 'warning');
+        });
+        
+        function getEcosystemSession() { return JSON.parse(localStorage.getItem('smaj_ecosystem_session')); }
+        
+        function loadOrderSummary() {
+            const orderItems = document.getElementById('orderItems');
+            if (cart.length === 0) { orderItems.innerHTML = '<p style="text-align:center;color:var(--text-light)">No items</p>'; return; }
+            orderItems.innerHTML = cart.map(item => `<div class="order-item"><img src="${item.image}" class="order-item-image"><div class="order-item-details"><h4>${item.name}</h4><span>Qty: ${item.quantity}</span></div><div class="order-item-price">${(item.price * item.quantity).toFixed(2)} Pi</div>`).join('');
+            updateTotals();
+        }
+        
+        function updateTotals() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const deliveryOption = document.getElementById('deliveryOption').value;
+            let deliveryFee = 0;
+            if (subtotal <= 100) deliveryFee = deliveryOption === 'express' ? 9.99 : deliveryOption === 'priority' ? 19.99 : 9.99;
+            const total = subtotal + deliveryFee;
+            document.getElementById('orderSubtotal').textContent = subtotal.toFixed(2) + ' Pi';
+            document.getElementById('orderDelivery').textContent = deliveryFee === 0 ? 'FREE' : deliveryFee.toFixed(2) + ' Pi';
+            document.getElementById('orderTotal').textContent = total.toFixed(2) + ' Pi';
+        }
+        
+        document.getElementById('deliveryOption').addEventListener('change', updateTotals);
+        
+        function placeOrder() {
+            const session = getEcosystemSession();
+            if (!session || !session.connected) { showNotification('Please connect your wallet first!', 'warning'); return; }
+            if (cart.length === 0) { showNotification('Your cart is empty!', 'warning'); return; }
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const address = document.getElementById('address').value;
+            if (!firstName || !lastName || !address) { showNotification('Please fill in all required fields!', 'warning'); return; }
+            
+            const orderId = 'SMAJ-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+            const order = { id: orderId, items: [...cart], total: parseFloat(document.getElementById('orderTotal').textContent), status: 'payment_confirmed', date: new Date().toISOString() };
+            const orders = JSON.parse(localStorage.getItem('smaj_orders') || '[]');
+            orders.push(order);
+            localStorage.setItem('smaj_orders', JSON.stringify(orders));
+            localStorage.setItem('smaj_cart', '[]');
+            window.location.href = 'order-success.html?order=' + orderId;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | SMAJ STORE</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="../logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 32px;
+        }
+        
+        .cart-items-section h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+        
+        .cart-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 50px;
+            gap: 16px;
+            padding: 16px 20px;
+            background: var(--bg-gray);
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+        
+        .cart-item {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 50px;
+            gap: 16px;
+            padding: 20px;
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            margin-bottom: 16px;
+            align-items: center;
+        }
+        
+        .cart-item-product {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            background: var(--bg-gray);
+        }
+        
+        .cart-item-details h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        
+        .cart-item-seller {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .cart-item-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .cart-item-quantity button {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            transition: var(--transition-fast);
+        }
+        
+        .cart-item-quantity button:hover:not(:disabled) {
+            background: var(--primary-color);
+            color: var(--text-white);
+            border-color: var(--primary-color);
+        }
+        
+        .cart-item-quantity button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .cart-item-quantity span {
+            width: 40px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .cart-item-total {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .cart-item-remove {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            transition: var(--transition-fast);
+        }
+        
+        .cart-item-remove:hover {
+            color: var(--danger-color);
+        }
+        
+        .cart-summary {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        
+        .cart-summary h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .summary-row.total {
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-top: 16px;
+        }
+        
+        .summary-row.total span:last-child {
+            color: var(--primary-color);
+            font-size: 24px;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--text-white);
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 24px;
+            transition: var(--transition-fast);
+        }
+        
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .wallet-info-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--success-color);
+            border-radius: var(--radius-md);
+            margin-top: 16px;
+        }
+        
+        .wallet-info-box i {
+            font-size: 20px;
+            color: var(--success-color);
+        }
+        
+        .wallet-info-box span {
+            font-size: 13px;
+            color: var(--success-color);
+        }
+        
+        .continue-shopping {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-top: 24px;
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 80px 20px;
+        }
+        
+        .empty-cart i {
+            font-size: 64px;
+            color: var(--text-light);
+            margin-bottom: 24px;
+        }
+        
+        .empty-cart h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+        
+        .empty-cart p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+        
+        @media (max-width: 1024px) {
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .cart-header {
+                display: none;
+            }
+            
+            .cart-item {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .cart-item-product {
+                flex-direction: column;
+            }
+            
+            .cart-item-image {
+                width: 100%;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="ecosystem-header">
+        <div class="header-left">
+            <a href="../index.html" class="back-to-hub">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to PI HUB</span>
+            </a>
+            <div class="store-logo">
+                <img src="../logo.png" alt="SMAJ STORE">
+                <span>SMAJ STORE</span>
+            </div>
+        </div>
+        
+        <div class="header-right">
+            <div class="wallet-status" id="walletStatus">
+                <span class="wallet-text" onclick="toggleWalletDropdown()">
+                    <i class="fas fa-wallet"></i>
+                    <span>Connect Wallet</span>
+                </span>
+                <div class="wallet-dropdown" id="walletDropdown">
+                    <div class="wallet-info" id="walletInfo" style="display: none;">
+                        <div class="wallet-balance">
+                            <span class="balance-label">Balance</span>
+                            <span class="balance-amount" id="walletBalance">0.00 Pi</span>
+                        </div>
+                        <button class="disconnect-btn" onclick="disconnectWallet()">Disconnect</button>
+                    </div>
+                    <button class="connect-btn" onclick="connectWallet()">Connect Pi Wallet</button>
+                </div>
+            </div>
+            
+            <a href="cart.html" class="header-icon cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </a>
+            
+            <div class="user-profile" onclick="toggleProfileMenu()">
+                <div class="profile-avatar"><i class="fas fa-user"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-container">
+        <h2 style="margin-bottom: 24px;">Shopping Cart</h2>
+        
+        <div class="cart-layout">
+            <div class="cart-items-section">
+                <div class="cart-header">
+                    <span>Product</span>
+                    <span>Unit Price</span>
+                    <span>Quantity</span>
+                    <span>Total</span>
+                    <span></span>
+                </div>
+                
+                <div id="cartItems">
+                    <!-- Cart items loaded via JS -->
+                </div>
+                
+                <div class="empty-cart" id="emptyCart" style="display: none;">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>Your cart is empty</h3>
+                    <p>Looks like you haven't added any items to your cart yet.</p>
+                    <a href="../index.html" class="btn btn-primary">Start Shopping</a>
+                </div>
+            </div>
+            
+            <div class="cart-summary" id="cartContent">
+                <h3>Order Summary</h3>
+                
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="cartSubtotal">0.00 Pi</span>
+                </div>
+                
+                <div class="summary-row">
+                    <span>Delivery Fee</span>
+                    <span id="cartDelivery">9.99 Pi</span>
+                </div>
+                
+                <div class="summary-row">
+                    <span>Escrow Protection</span>
+                    <span>FREE</span>
+                </div>
+                
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="cartTotal">0.00 Pi</span>
+                </div>
+                
+                <div class="wallet-info-box">
+                    <i class="fas fa-wallet"></i>
+                    <span>Wallet connected - payment ready</span>
+                </div>
+                
+                <button class="checkout-btn" onclick="proceedToCheckout()">
+                    <i class="fas fa-lock"></i> Proceed to Checkout
+                </button>
+                
+                <a href="../index.html" class="continue-shopping">
+                    <i class="fas fa-arrow-left"></i> Continue Shopping
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="ecosystem-footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <img src="../logo.png" alt="SMAJ">
+                <div><h3>SMAJ STORE</h3><p>Part of SMAJ Ecosystem</p></div>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2026 SMAJ PI HUB. All rights reserved.</p></div>
+    </footer>
+
+    <script src="../js/products.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            checkEcosystemSession();
+            initCart();
+            renderCartItems();
+        });
+        
+        function renderCartItems() {
+            const cartContainer = document.getElementById('cartItems');
+            const emptyCart = document.getElementById('emptyCart');
+            const cartContent = document.getElementById('cartContent');
+            
+            if (cart.length === 0) {
+                emptyCart.style.display = 'flex';
+                cartContent.style.display = 'none';
+                return;
+            }
+            
+            emptyCart.style.display = 'none';
+            cartContent.style.display = 'block';
+            
+            const deliveryFee = getCartTotal() > 100 ? 0 : 9.99;
+            const subtotal = getCartTotal();
+            const total = subtotal + deliveryFee;
+            
+            document.getElementById('cartSubtotal').textContent = subtotal.toFixed(2) + ' Pi';
+            document.getElementById('cartDelivery').textContent = deliveryFee === 0 ? 'FREE' : deliveryFee.toFixed(2) + ' Pi';
+            document.getElementById('cartTotal').textContent = total.toFixed(2) + ' Pi';
+            
+            cartContainer.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-product">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <h4>${item.name}</h4>
+                            <div class="cart-item-seller">
+                                ${item.seller.verified ? '<span class="verified-badge"><i class="fas fa-check"></i> Verified</span>' : ''}
+                                <span>${item.seller.name}</span>
+                            </div>
+                            <div class="cart-item-price">${item.price.toFixed(2)} Pi</div>
+                        </div>
+                    </div>
+                    <div class="cart-item-quantity">
+                        <button onclick="updateQuantity(${item.id}, ${item.quantity - 1})" ${item.quantity <= 1 ? 'disabled' : ''}>
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <span>${item.quantity}</span>
+                        <button onclick="updateQuantity(${item.id}, ${item.quantity + 1})" ${item.quantity >= item.stock ? 'disabled' : ''}>
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="cart-item-total">${(item.price * item.quantity).toFixed(2)} Pi</div>
+                    <button class="cart-item-remove" onclick="removeFromCart(${item.id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+        
+        function updateQuantity(productId, newQuantity) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                if (newQuantity <= 0) {
+                    removeFromCart(productId);
+                } else if (newQuantity > item.stock) {
+                    showNotification('Maximum stock available', 'warning');
+                } else {
+                    item.quantity = newQuantity;
+                    saveCart();
+                    renderCartItems();
+                }
+            }
+        }
+        
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCart();
+            updateCartCount();
+            renderCartItems();
+            showNotification('Item removed from cart', 'info');
+        }
+        
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                showNotification('Your cart is empty!', 'warning');
+                return;
+            }
+            
+            const session = getEcosystemSession();
+            if (!session || !session.connected) {
+                showNotification('Please connect your wallet first!', 'warning');
+                return;
+            }
+            
+            window.location.href = 'checkout.html';
+        }
+        
+        function getEcosystemSession() {
+            const session = localStorage.getItem('smaj_ecosystem_session');
+            return session ? JSON.parse(session) : null;
+        }
+    </script>
+</body>
+</html>
+

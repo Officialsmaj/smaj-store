@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMAJ STORE - E-Commerce Marketplace | SMAJ Ecosystem</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Shared Ecosystem Header -->
+    <header class="ecosystem-header">
+        <div class="header-left">
+            <a href="#" class="back-to-hub" onclick="returnToHub()">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to PI HUB</span>
+            </a>
+            <div class="store-logo">
+                <img src="logo.png" alt="SMAJ STORE">
+                <span>SMAJ STORE</span>
+            </div>
+        </div>
+        
+        <div class="header-center">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search products, vendors, categories...">
+            </div>
+        </div>
+        
+        <div class="header-right">
+            <div class="wallet-status" id="walletStatus">
+                <i class="fas fa-wallet"></i>
+                <span class="wallet-text">Connect Wallet</span>
+                <div class="wallet-dropdown" id="walletDropdown">
+                    <div class="wallet-info" id="walletInfo" style="display: none;">
+                        <div class="wallet-balance">
+                            <span class="balance-label">Balance</span>
+                            <span class="balance-amount" id="walletBalance">0.00 Pi</span>
+                        </div>
+                        <div class="wallet-address">
+                            <span id="walletAddress">**** **** **** ****</span>
+                            <i class="fas fa-copy" onclick="copyAddress()"></i>
+                        </div>
+                        <button class="disconnect-btn" onclick="disconnectWallet()">Disconnect</button>
+                    </div>
+                    <button class="connect-btn" onclick="connectWallet()">Connect Pi Wallet</button>
+                </div>
+            </div>
+            
+            <a href="pages/cart.html" class="header-icon cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </a>
+            
+            <div class="notification-icon">
+                <i class="fas fa-bell"></i>
+                <span class="notification-dot"></span>
+            </div>
+            
+            <div class="user-profile" id="userProfile" onclick="toggleProfileMenu()">
+                <div class="profile-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <a href="#"><i class="fas fa-user-circle"></i> My Profile</a>
+                    <a href="pages/orders.html"><i class="fas fa-box"></i> My Orders</a>
+                    <a href="#"><i class="fas fa-heart"></i> Wishlist</a>
+                    <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                    <hr>
+                    <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Store Entry Layer / Hero Section -->
+    <section class="store-hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-shield-alt"></i>
+                <span>Verified Sellers Only</span>
+            </div>
+            <h1>Welcome to SMAJ STORE</h1>
+            <p>Your trusted blockchain-powered marketplace within the SMAJ Ecosystem. Shop with Pi, earn rewards, and enjoy secure escrow protection.</p>
+            
+            <div class="hero-actions">
+                <a href="#featured-products" class="btn btn-primary">
+                    <i class="fas fa-shopping-bag"></i>
+                    Start Shopping
+                </a>
+                <a href="#categories" class="btn btn-secondary">
+                    <i class="fas fa-compass"></i>
+                    Browse Categories
+                </a>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">10K+</span>
+                    <span class="stat-label">Products</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Verified Sellers</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">50K+</span>
+                    <span class="stat-label">Happy Buyers</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-visual">
+            <div class="wallet-indicator" id="heroWalletIndicator" style="display: none;">
+                <i class="fas fa-check-circle"></i>
+                <span>Wallet Connected</span>
+                <span class="connected-address" id="heroAddress"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Badges Section -->
+    <section class="trust-badges">
+        <div class="badge">
+            <i class="fas fa-shield-virus"></i>
+            <div>
+                <strong>Escrow Protection</strong>
+                <span>Secure payments until delivery</span>
+            </div>
+        </div>
+        <div class="badge">
+            <i class="fas fa-check-circle"></i>
+            <div>
+                <strong>Verified Sellers</strong>
+                <span>All vendors KYC verified</span>
+            </div>
+        </div>
+        <div class="badge">
+            <i class="fas fa-coins"></i>
+            <div>
+                <strong>Pi & Token Payments</strong>
+                <span>Multiple crypto options</span>
+            </div>
+        </div>
+        <div class="badge">
+            <i class="fas fa-undo"></i>
+            <div>
+                <strong>Easy Returns</strong>
+                <span>7-day return policy</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Navigation -->
+    <section class="categories-section" id="categories">
+        <div class="section-header">
+            <h2>Shop by Category</h2>
+            <a href="pages/listing.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="categories-grid" id="categoriesGrid">
+            <!-- Categories will be loaded dynamically -->
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products" id="featured-products">
+        <div class="section-header">
+            <h2>Featured Products</h2>
+            <a href="pages/listing.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="products-grid" id="featuredGrid">
+            <!-- Products will be loaded dynamically -->
+        </div>
+    </section>
+
+    <!-- Trending Products -->
+    <section class="trending-products">
+        <div class="section-header">
+            <h2>Trending Now</h2>
+            <a href="pages/listing.html?sort=popularity" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="products-grid" id="trendingGrid">
+            <!-- Products will be loaded dynamically -->
+        </div>
+    </section>
+
+    <!-- Top Vendors -->
+    <section class="top-vendors">
+        <div class="section-header">
+            <h2>Top Verified Sellers</h2>
+            <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="vendors-grid" id="vendorsGrid">
+            <!-- Vendors will be loaded dynamically -->
+        </div>
+    </section>
+
+    <!-- Promotional Banner -->
+    <section class="promo-banner">
+        <div class="promo-content">
+            <span class="promo-tag">Limited Offer</span>
+            <h3>Get 10% Off Your First Purchase</h3>
+            <p>Use code: SMAJ10 at checkout</p>
+            <a href="pages/listing.html" class="btn btn-primary">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Recently Added -->
+    <section class="recent-products">
+        <div class="section-header">
+            <h2>Recently Added</h2>
+            <a href="pages/listing.html?sort=newest" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="products-grid" id="recentGrid">
+            <!-- Products will be loaded dynamically -->
+        </div>
+    </section>
+
+    <!-- Shared Ecosystem Footer -->
+    <footer class="ecosystem-footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <img src="logo.png" alt="SMAJ">
+                <div>
+                    <h3>SMAJ STORE</h3>
+                    <p>Part of SMAJ Ecosystem - Unified Pi-Powered Digital Economy</p>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <div class="link-column">
+                    <h4>Store</h4>
+                    <a href="#">About Us</a>
+                    <a href="#">How It Works</a>
+                    <a href="#">Seller Registration</a>
+                    <a href="#">Buyer Protection</a>
+                </div>
+                <div class="link-column">
+                    <h4>Support</h4>
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Report Issue</a>
+                    <a href="#">Dispute Resolution</a>
+                </div>
+                <div class="link-column">
+                    <h4>Legal</h4>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Refund Policy</a>
+                    <a href="#">Escrow Agreement</a>
+                </div>
+                <div class="link-column">
+                    <h4>Connect</h4>
+                    <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="#"><i class="fab fa-telegram"></i> Telegram</a>
+                    <a href="#"><i class="fab fa-discord"></i> Discord</a>
+                    <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 SMAJ PI HUB. All rights reserved.</p>
+            <p>Powered by Pi Network | Secure Blockchain Transactions</p>
+        </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Order | SMAJ STORE</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="../logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-container { max-width: 800px; margin: 0 auto; padding: 24px; }
+        .tracking-card { background: var(--bg-white); border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; }
+        .tracking-header { display: flex; justify-content: space-between; align-items: center; padding: 24px; background: var(--bg-gray); }
+        .tracking-header h2 { font-size: 20px; font-weight: 700; }
+        .tracking-id { font-family: monospace; font-size: 16px; color: var(--primary-color); }
+        .tracking-timeline { padding: 40px 24px; }
+        .timeline { position: relative; padding-left: 40px; }
+        .timeline::before { content: ''; position: absolute; left: 15px; top: 0; bottom: 0; width: 2px; background: var(--border-color); }
+        .timeline-item { position: relative; padding-bottom: 32px; }
+        .timeline-item:last-child { padding-bottom: 0; }
+        .timeline-dot { position: absolute; left: -28px; top: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--border-color); border: 3px solid var(--bg-white); }
+        .timeline-item.active .timeline-dot { background: var(--success-color); }
+        .timeline-item.completed .timeline-dot { background: var(--success-color); }
+        .timeline-content h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+        .timeline-content p { font-size: 14px; color: var(--text-secondary); }
+        .timeline-date { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+        .order-details { padding: 24px; border-top: 1px solid var(--border-color); }
+        .order-details h3 { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+        .detail-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border-color); }
+        .detail-row:last-child { border-bottom: none; }
+        .detail-label { color: var(--text-secondary); font-size: 14px; }
+        .detail-value { font-weight: 500; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <header class="ecosystem-header">
+        <div class="header-left">
+            <a href="../index.html" class="back-to-hub"><i class="fas fa-arrow-left"></i><span>Back to PI HUB</span></a>
+            <div class="store-logo"><img src="../logo.png" alt="SMAJ STORE"><span>SMAJ STORE</span></div>
+        <div class="header-right">
+            <a href="cart.html" class="header-icon cart-icon"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></a>
+        </div>
+    </header>
+
+    <div class="page-container">
+        <div class="tracking-card">
+            <div class="tracking-header">
+                <div>
+                    <h2>Order Tracking</h2>
+                    <p style="color:var(--text-secondary);font-size:14px;margin-top:4px">Track your order status</p>
+                </div>
+                <div class="tracking-id" id="trackingId">SMAJ-XXXXXXXX</div>
+            
+            <div class="tracking-timeline">
+                <div class="timeline" id="timeline">
+                    <div class="timeline-item active" id="step1">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>Order Placed</h4>
+                            <p>Your order has been confirmed</p>
+                            <div class="timeline-date" id="date1"></div>
+                    </div>
+                    <div class="timeline-item" id="step2">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>Payment Confirmed</h4>
+                            <p>Your payment is being held in escrow</p>
+                            <div class="timeline-date" id="date2"></div>
+                    </div>
+                    <div class="timeline-item" id="step3">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>Processing</h4>
+                            <p>Seller is preparing your order</p>
+                            <div class="timeline-date" id="date3"></div>
+                    </div>
+                    <div class="timeline-item" id="step4">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>Shipped</h4>
+                            <p>Your order is on its way</p>
+                            <div class="timeline-date" id="date4"></div>
+                    </div>
+                    <div class="timeline-item" id="step5">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>Delivered</h4>
+                            <p>Order has been delivered</p>
+                            <div class="timeline-date" id="date5"></div>
+                    </div>
+            </div>
+            
+            <div class="order-details">
+                <h3>Order Details</h3>
+                <div class="detail-row"><span class="detail-label">Order ID</span><span class="detail-value" id="detailId">-</span></div>
+                <div class="detail-row"><span class="detail-label">Status</span><span class="detail-value" id="detailStatus">-</span></div>
+                <div class="detail-row"><span class="detail-label">Total Amount</span><span class="detail-value" id="detailTotal">-</span></div>
+                <div class="detail-row"><span class="detail-label">Payment Method</span><span class="detail-value">Pi Wallet (Escrow)</span></div>
+        </div>
+        
+        <div style="text-align:center;margin-top:24px">
+            <a href="orders.html" class="btn btn-primary">View All Orders</a>
+        </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get('order');
+            
+            const orders = JSON.parse(localStorage.getItem('smaj_orders') || '[]');
+            const order = orders.find(o => o.id === orderId);
+            
+            if (!order) {
+                document.getElementById('trackingId').textContent = 'Order not found';
+                return;
+            }
+            
+            document.getElementById('trackingId').textContent = order.id;
+            document.getElementById('detailId').textContent = order.id;
+            document.getElementById('detailTotal').textContent = order.total.toFixed(2) + ' Pi';
+            
+            const now = new Date();
+            document.getElementById('date1').textContent = now.toLocaleString();
+            document.getElementById('date2').textContent = now.toLocaleString();
+            
+            const status = order.status;
+            document.getElementById('detailStatus').textContent = status.replace('_', ' ').toUpperCase();
+            
+            const steps = { 'payment_confirmed': 2, 'processing': 3, 'shipped': 4, 'delivered': 5 };
+            const currentStep = steps[status] || 1;
+            
+            for (let i = 1; i <= currentStep; i++) {
+                const step = document.getElementById('step' + i);
+                if (step) step.classList.add('active', 'completed');
+            }
+        });
+    </script>
+</body>
+</html>

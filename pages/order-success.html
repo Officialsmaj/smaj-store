@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success | SMAJ STORE</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="../logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .success-container { max-width: 600px; margin: 80px auto; padding: 48px; text-align: center; background: var(--bg-white); border-radius: var(--radius-xl); border: 1px solid var(--border-color); }
+        .success-icon { width: 80px; height: 80px; margin: 0 auto 24px; background: rgba(16, 185, 129, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .success-icon i { font-size: 40px; color: var(--success-color); }
+        .success-container h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+        .success-container p { color: var(--text-secondary); margin-bottom: 8px; }
+        .order-id { display: inline-block; padding: 8px 16px; background: var(--bg-gray); border-radius: var(--radius-md); font-family: monospace; font-size: 16px; font-weight: 600; margin: 16px 0; }
+        .escrow-notice { display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: rgba(59, 130, 246, 0.1); border-radius: var(--radius-md); margin: 24px 0; text-align: left; }
+        .escrow-notice i { color: var(--info-color); font-size: 20px; margin-top: 2px; }
+        .escrow-notice p { font-size: 14px; color: var(--text-secondary); margin: 0; }
+        .success-actions { display: flex; gap: 16px; justify-content: center; margin-top: 32px; }
+        .btn-view-orders { padding: 14px 28px; background: var(--primary-color); color: var(--text-white); border-radius: var(--radius-md); font-weight: 600; }
+        .btn-continue { padding: 14px 28px; background: var(--bg-gray); color: var(--text-primary); border-radius: var(--radius-md); font-weight: 600; }
+    </style>
+</head>
+<body>
+    <header class="ecosystem-header">
+        <div class="header-left">
+            <a href="../index.html" class="back-to-hub"><i class="fas fa-arrow-left"></i><span>Back to PI HUB</span></a>
+            <div class="store-logo"><img src="../logo.png" alt="SMAJ STORE"><span>SMAJ STORE</span></div>
+    </header>
+
+    <div class="success-container">
+        <div class="success-icon"><i class="fas fa-check"></i></div>
+        <h1>Order Placed Successfully!</h1>
+        <p>Thank you for your purchase. Your order has been confirmed.</p>
+        <div class="order-id" id="orderId">SMAJ-XXXXXXXX</div>
+        <p id="orderMessage">Your payment is being held in escrow until delivery is confirmed.</p>
+        
+        <div class="escrow-notice">
+            <i class="fas fa-info-circle"></i>
+            <p>Payment Status: <strong>Escrow Protected</strong><br>Your funds are secure and will be released to the seller once you confirm delivery.</p>
+        </div>
+
+        <div class="success-actions">
+            <a href="orders.html" class="btn-view-orders"><i class="fas fa-box"></i> View Orders</a>
+            <a href="../index.html" class="btn-continue"><i class="fas fa-shopping-bag"></i> Continue Shopping</a>
+        </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get('order');
+            if (orderId) {
+                document.getElementById('orderId').textContent = orderId;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail | SMAJ STORE</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="../logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .breadcrumb a {
+            color: var(--primary-color);
+        }
+        
+        .product-detail-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+        
+        .product-gallery {
+            position: relative;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            background: var(--bg-gray);
+        }
+        
+        .thumbnail-list {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition-fast);
+        }
+        
+        .thumbnail:hover,
+        .thumbnail.active {
+            border-color: var(--primary-color);
+        }
+        
+        .product-info-section h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+        
+        .product-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .product-rating i {
+            color: var(--secondary-color);
+        }
+        
+        .product-rating span {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .product-category {
+            font-size: 14px;
+            color: var(--primary-color);
+        }
+        
+        .product-price-section {
+            margin: 24px 0;
+            padding: 20px;
+            background: var(--bg-gray);
+            border-radius: var(--radius-lg);
+        }
+        
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .current-price {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .original-price {
+            font-size: 20px;
+            color: var(--text-light);
+            text-decoration: line-through;
+        }
+        
+        .discount-badge {
+            padding: 4px 12px;
+            background: var(--danger-color);
+            color: var(--text-white);
+            border-radius: var(--radius-full);
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .stock-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        
+        .stock-status.in-stock {
+            color: var(--success-color);
+        }
+        
+        .stock-status.low-stock {
+            color: var(--warning-color);
+        }
+        
+        .stock-status.out-of-stock {
+            color: var(--danger-color);
+        }
+        
+        .seller-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            margin: 24px 0;
+        }
+        
+        .seller-avatar {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: var(--radius-md);
+            color: var(--text-white);
+            font-weight: 700;
+        }
+        
+        .seller-details h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .seller-details span {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 24px 0;
+        }
+        
+        .quantity-selector label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+        }
+        
+        .quantity-controls button {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: var(--text-secondary);
+            transition: var(--transition-fast);
+        }
+        
+        .quantity-controls button:hover {
+            background: var(--primary-color);
+            color: var(--text-white);
+        }
+        
+        .quantity-controls span {
+            width: 60px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+        }
+        
+        .btn-add-cart {
+            flex: 1;
+            padding: 16px 24px;
+            background: var(--primary-color);
+            color: var(--text-white);
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: var(--transition-fast);
+        }
+        
+        .btn-add-cart:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-buy-now {
+            flex: 1;
+            padding: 16px 24px;
+            background: var(--secondary-color);
+            color: var(--text-white);
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            transition: var(--transition-fast);
+        }
+        
+        .btn-buy-now:hover {
+            background: var(--secondary-dark);
+        }
+        
+        .escrow-notice {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--success-color);
+            border-radius: var(--radius-md);
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--success-color);
+        }
+        
+        .product-description {
+            margin-top: 32px;
+        }
+        
+        .product-description h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+        
+        .product-description p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .product-tabs {
+            margin-top: 48px;
+        }
+        
+        .tabs-nav {
+            display: flex;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+        
+        .tab-btn {
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border-bottom: 2px solid transparent;
+            transition: var(--transition-fast);
+        }
+        
+        .tab-btn:hover {
+            color: var(--primary-color);
+        }
+        
+        .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .specs-table tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .specs-table td {
+            padding: 12px 0;
+            font-size: 14px;
+        }
+        
+        .specs-table td:first-child {
+            font-weight: 600;
+            color: var(--text-primary);
+            width: 200px;
+        }
+        
+        .specs-table td:last-child {
+            color: var(--text-secondary);
+        }
+        
+        .reviews-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .review-item {
+            padding: 20px;
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+        }
+        
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .review-avatar {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-gray);
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .review-user {
+            flex: 1;
+        }
+        
+        .review-user h4 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .review-user span {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        
+        .review-rating {
+            color: var(--secondary-color);
+            font-size: 14px;
+        }
+        
+        .review-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .product-detail-layout {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .main-image {
+                height: 300px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="ecosystem-header">
+        <div class="header-left">
+            <a href="../index.html" class="back-to-hub">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to PI HUB</span>
+            </a>
+            <div class="store-logo">
+                <img src="../logo.png" alt="SMAJ STORE">
+                <span>SMAJ STORE</span>
+            </div>
+        </div>
+        
+        <div class="header-center">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search products...">
+            </div>
+        </div>
+        
+        <div class="header-right">
+            <div class="wallet-status" id="walletStatus">
+                <span class="wallet-text" onclick="toggleWalletDropdown()">
+                    <i class="fas fa-wallet"></i>
+                    <span>Connect Wallet</span>
+                </span>
+                <div class="wallet-dropdown" id="walletDropdown">
+                    <div class="wallet-info" id="walletInfo" style="display: none;">
+                        <div class="wallet-balance">
+                            <span class="balance-label">Balance</span>
+                            <span class="balance-amount" id="walletBalance">0.00 Pi</span>
+                        </div>
+                        <button class="disconnect-btn" onclick="disconnectWallet()">Disconnect</button>
+                    </div>
+                    <button class="connect-btn" onclick="connectWallet()">Connect Pi Wallet</button>
+                </div>
+            </div>
+            
+            <a href="cart.html" class="header-icon cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </a>
+            
+            <div class="user-profile" onclick="toggleProfileMenu()">
+                <div class="profile-avatar"><i class="fas fa-user"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="listing.html">Products</a>
+            <i class="fas fa-chevron-right"></i>
+            <span id="productName">Product Details</span>
+        </div>
+        
+        <!-- Product Detail -->
+        <div class="product-detail-layout">
+            <div class="product-gallery">
+                <img src="" alt="" class="main-image" id="mainImage">
+                <div class="thumbnail-list" id="thumbnails"></div>
+            </div>
+            
+            <div class="product-info-section">
+                <div class="product-meta">
+                    <span class="product-category" id="productCategory">Category</span>
+                    <div class="product-rating" id="productRating"></div>
+                </div>
+                
+                <h1 id="productTitle">Product Title</h1>
+                
+                <div class="product-price-section">
+                    <div class="price-row">
+                        <span class="current-price" id="currentPrice">0.00 Pi</span>
+                        <span class="original-price" id="originalPrice"></span>
+                        <span class="discount-badge" id="discountBadge" style="display: none;">0% OFF</span>
+                    </div>
+                    <div class="stock-status in-stock" id="stockStatus">
+                        <i class="fas fa-check-circle"></i>
+                        <span>In Stock</span>
+                    </div>
+                </div>
+                
+                <div class="seller-info">
+                    <div class="seller-avatar" id="sellerAvatar">S</div>
+                    <div class="seller-details">
+                        <h4 id="sellerName">Seller Name</h4>
+                        <span id="sellerInfo">Verified Seller • 0 sales</span>
+                    </div>
+                </div>
+                
+                <div class="quantity-selector">
+                    <label>Quantity:</label>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity(-1)"><i class="fas fa-minus"></i></button>
+                        <span id="quantity">1</span>
+                        <button onclick="changeQuantity(1)"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn-add-cart" onclick="addToCartFromDetail()">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                    <button class="btn-buy-now" onclick="buyNow()">
+                        Buy Now
+                    </button>
+                </div>
+                
+                <div class="escrow-notice">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Your payment is protected by SMAJ Escrow until delivery is confirmed</span>
+                </div>
+                
+                <div class="product-description">
+                    <h3>Description</h3>
+                    <p id="productDescription">Product description goes here...</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Product Tabs -->
+        <div class="product-tabs">
+            <div class="tabs-nav">
+                <button class="tab-btn active" onclick="switchTab('specs')">Specifications</button>
+                <button class="tab-btn" onclick="switchTab('reviews')">Reviews</button>
+            </div>
+            
+            <div class="tab-content active" id="specs">
+                <table class="specs-table" id="specsTable">
+                    <!-- Specs loaded via JS -->
+                </table>
+            </div>
+            
+            <div class="tab-content" id="reviews">
+                <div class="reviews-list" id="reviewsList">
+                    <!-- Reviews loaded via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="ecosystem-footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <img src="../logo.png" alt="SMAJ">
+                <div><h3>SMAJ STORE</h3><p>Part of SMAJ Ecosystem</p></div>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2026 SMAJ PI HUB. All rights reserved.</p></div>
+    </footer>
+
+    <script src="../js/products.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        let currentProduct = null;
+        let quantity = 1;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            checkEcosystemSession();
+            initCart();
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            
+            if (productId) {
+                currentProduct = products.find(p => p.id === parseInt(productId));
+                if (currentProduct) {
+                    loadProductDetail();
+                }
+            }
+        });
+        
+        function loadProductDetail() {
+            document.getElementById('productName').textContent = currentProduct.name;
+            document.getElementById('productTitle').textContent = currentProduct.name;
+            document.getElementById('productCategory').textContent = currentProduct.category;
+            document.getElementById('currentPrice').textContent = currentProduct.price.toFixed(2) + ' Pi';
+            document.getElementById('productDescription').textContent = currentProduct.description;
+            
+            if (currentProduct.originalPrice) {
+                document.getElementById('originalPrice').textContent = currentProduct.originalPrice.toFixed(2) + ' Pi';
+                const discount = Math.round((1 - currentProduct.price / currentProduct.originalPrice) * 100);
+                document.getElementById('discountBadge').textContent = discount + '% OFF';
+                document.getElementById('discountBadge').style.display = 'inline-block';
+            }
+            
+            // Rating
+            const rating = getStarRating(currentProduct.rating);
+            document.getElementById('productRating').innerHTML = `${rating} <span>(${currentProduct.reviews} reviews)</span>`;
+            
+            // Stock status
+            const stockStatus = document.getElementById('stockStatus');
+            if (currentProduct.stock === 0) {
+                stockStatus.className = 'stock-status out-of-stock';
+                stockStatus.innerHTML = '<i class="fas fa-times-circle"></i><span>Out of Stock</span>';
+            } else if (currentProduct.stock < 10) {
+                stockStatus.className = 'stock-status low-stock';
+                stockStatus.innerHTML = `<i class="fas fa-exclamation-circle"></i><span>Only ${currentProduct.stock} left</span>`;
+            } else {
+                stockStatus.innerHTML = '<i class="fas fa-check-circle"></i><span>In Stock</span>';
+            }
+            
+            // Seller info
+            document.getElementById('sellerAvatar').textContent = currentProduct.seller.name.substring(0, 2).toUpperCase();
+            document.getElementById('sellerName').textContent = currentProduct.seller.name;
+            document.getElementById('sellerInfo').textContent = `Verified Seller • ${currentProduct.seller.totalSales} sales`;
+            
+            // Image
+            document.getElementById('mainImage').src = currentProduct.image;
+            
+            // Specs
+            const specsData = [
+                ['Category', currentProduct.category],
+                ['Brand', 'SMAJ Marketplace'],
+                ['Model', 'Standard'],
+                ['Warranty', '1 Year'],
+                ['Return Policy', '7 Days'],
+                ['Payment Methods', 'Pi, SMAJ Token']
+            ];
+            
+            document.getElementById('specsTable').innerHTML = specsData.map(row => 
+                `<tr><td>${row[0]}</td><td>${row[1]}</td></tr>`
+            ).join('');
+            
+            // Mock reviews
+            const mockReviews = [
+                { user: 'John D.', rating: 5, text: 'Great product! Fast delivery and exactly as described.', date: '2 days ago' },
+                { user: 'Sarah M.', rating: 4, text: 'Good quality, slightly pricey but worth it.', date: '1 week ago' },
+                { user: 'Mike R.', rating: 5, text: 'Excellent seller, highly recommend!', date: '2 weeks ago' }
+            ];
+            
+            document.getElementById('reviewsList').innerHTML = mockReviews.map(review => `
+                <div class="review-item">
+                    <div class="review-header">
+                        <div class="review-avatar">${review.user.charAt(0)}</div>
+                        <div class="review-user">
+                            <h4>${review.user}</h4>
+                            <span>${review.date}</span>
+                        </div>
+                        <div class="review-rating">${getStarRating(review.rating)}</div>
+                    </div>
+                    <p class="review-text">${review.text}</p>
+                </div>
+            `).join('');
+        }
+        
+        function changeQuantity(delta) {
+            quantity = Math.max(1, Math.min(quantity + delta, currentProduct ? currentProduct.stock : 10));
+            document.getElementById('quantity').textContent = quantity;
+        }
+        
+        function addToCartFromDetail() {
+            if (currentProduct) {
+                addToCart(currentProduct, quantity);
+            }
+        }
+        
+        function buyNow() {
+            addToCartFromDetail();
+            window.location.href = 'checkout.html';
+        }
+        
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+        
+        function getStarRating(rating) {
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 >= 0.5;
+            let stars = '';
+            
+            for (let i = 0; i < fullStars; i++) stars += '<i class="fas fa-star"></i>';
+            if (halfStar) stars += '<i class="fas fa-star-half-alt"></i>';
+            for (let i = 5 - fullStars - (halfStar ? 1 : 0); i > 0; i--) stars += '<i class="far fa-star"></i>';
+            
+            return stars;
+        }
+    </script>
+</body>
+</html>
+
