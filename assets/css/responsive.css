@@ -1,9 +1,0 @@
-@media (max-width: 960px) {
-  .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-@media (max-width: 680px) {
-  .grid-3, .grid-2 { grid-template-columns: 1fr; }
-  .hero { padding: 1.2rem; }
-  .actions-inline { flex-direction: column; align-items: flex-start; }
-}
