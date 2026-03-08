@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | SMAJ STORE</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="../logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-container { max-width: 800px; margin: 0 auto; padding: 24px; }
+        .settings-section { background: var(--bg-white); border: 1px solid var(--border-color); border-radius: var(--radius-lg); margin-bottom: 20px; }
+        .section-header { padding: 20px; border-bottom: 1px solid var(--border-color); }
+        .section-header h3 { font-size: 18px; }
+        .setting-item { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid var(--border-color); }
+        .setting-info h4 { font-size: 15px; margin-bottom: 4px; }
+        .setting-info p { font-size: 13px; color: var(--text-secondary); }
+        .toggle { width: 50px; height: 26px; background: var(--bg-gray); border-radius: 13px; position: relative; cursor: pointer; }
+        .toggle.active { background: var(--primary-color); }
+        .toggle::after { content: ''; position: absolute; width: 22px; height: 22px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: 0.3s; }
+        .toggle.active::after { left: 26px; }
+    </style>
+</head>
+<body>
+    <header class="ecosystem-header">
+        <div class="header-left">
+            <a href="../index.html" class="back-to-hub"><i class="fas fa-arrow-left"></i><span>Back</span></a>
+            <div class="store-logo"><img src="../logo.png" alt="SMAJ STORE"><span>SMAJ STORE</span></div>
+        </div>
+    </header>
+    <div class="page-container">
+        <h2 style="margin-bottom:24px">Settings</h2>
+        <div class="settings-section">
+            <div class="section-header"><h3>Notifications</h3></div>
+            <div class="setting-item">
+                <div class="setting-info"><h4>Push Notifications</h4><p>Receive order updates</p></div>
+                <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info"><h4>Email Notifications</h4><p>Receive updates via email</p></div>
+                <div class="toggle active" onclick="this.classList.toggle('active')"></div>
+            </div>
+        </div>
+        <div class="settings-section">
+            <div class="section-header"><h3>Security</h3></div>
+            <div class="setting-item">
+                <div class="setting-info"><h4>Two-Factor Authentication</h4><p>Extra security</p></div>
+                <div class="toggle" onclick="this.classList.toggle('active')"></div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/app.js"></script>
+</body>
+</html>

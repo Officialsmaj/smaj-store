@@ -1,0 +1,66 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Addresses | SMAJ STORE</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="../logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-container { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .address-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .address-card { background: var(--bg-white); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; position: relative; }
+        .address-card.default { border-color: var(--primary-color); }
+        .default-badge { position: absolute; top: 12px; right: 12px; padding: 4px 10px; background: var(--primary-color); color: var(--text-white); font-size: 11px; border-radius: var(--radius-full); }
+        .address-type { font-size: 14px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; }
+        .address-text { font-size: 15px; line-height: 1.6; margin-bottom: 16px; }
+        .address-actions { display: flex; gap: 8px; }
+        .action-btn { padding: 8px 12px; background: var(--bg-gray); border-radius: var(--radius-md); font-size: 13px; cursor: pointer; }
+        .action-btn:hover { background: var(--primary-color); color: var(--text-white); }
+        .add-address { background: var(--bg-white); border: 2px dashed var(--border-color); border-radius: var(--radius-lg); padding: 40px; text-align: center; cursor: pointer; }
+        .add-address:hover { border-color: var(--primary-color); }
+        .add-address i { font-size: 32px; color: var(--text-light); margin-bottom: 12px; }
+    </style>
+</head>
+<body>
+    <header class="ecosystem-header">
+        <div class="header-left">
+            <a href="../index.html" class="back-to-hub"><i class="fas fa-arrow-left"></i><span>Back</span></a>
+            <div class="store-logo"><img src="../logo.png" alt="SMAJ STORE"><span>SMAJ STORE</span></div>
+        </div>
+        <div class="header-right">
+            <a href="cart.html" class="header-icon cart-icon"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></a>
+        </div>
+    </header>
+    <div class="page-container">
+        <div class="page-header">
+            <h2>My Addresses</h2>
+            <button class="btn btn-primary"><i class="fas fa-plus"></i> Add Address</button>
+        </div>
+        <div class="address-grid">
+            <div class="address-card default">
+                <span class="default-badge">Default</span>
+                <div class="address-type"><i class="fas fa-home"></i> Home</div>
+                <div class="address-text"><strong>John Doe</strong><br>123 Main Street<br>Apt 4B<br>New York, NY 10001<br>+1 234 567 8900</div>
+                <div class="address-actions">
+                    <button class="action-btn">Edit</button>
+                    <button class="action-btn">Delete</button>
+                </div>
+            </div>
+            <div class="address-card">
+                <div class="address-type"><i class="fas fa-briefcase"></i> Office</div>
+                <div class="address-text"><strong>John Doe</strong><br>456 Business Ave<br>Suite 100<br>San Francisco, CA 94105<br>+1 987 654 3210</div>
+                <div class="address-actions">
+                    <button class="action-btn">Edit</button>
+                    <button class="action-btn">Delete</button>
+                </div>
+            </div>
+            <div class="add-address"><i class="fas fa-plus-circle"></i><p>Add New Address</p></div>
+        </div>
+    </div>
+    <script src="../js/app.js"></script>
+</body>
+</html>

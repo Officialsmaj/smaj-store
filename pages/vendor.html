@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechZone Store | SMAJ STORE</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="../logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+        .vendor-header { display: flex; align-items: center; gap: 24px; padding: 32px; background: var(--bg-white); border-radius: var(--radius-lg); margin-bottom: 32px; border: 1px solid var(--border-color); }
+        .vendor-banner { width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); border-radius: var(--radius-lg); color: var(--text-white); font-size: 40px; font-weight: 700; }
+        .vendor-details h1 { font-size: 28px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
+        .vendor-meta { display: flex; gap: 24px; color: var(--text-secondary); font-size: 14px; }
+        .vendor-stats-bar { display: flex; gap: 32px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-color); }
+        .vendor-stat { text-align: center; }
+        .vendor-stat-value { font-size: 24px; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <header class="ecosystem-header">
+        <div class="header-left">
+            <a href="../index.html" class="back-to-hub"><i class="fas fa-arrow-left"></i><span>Back to PI HUB</span></a>
+            <div class="store-logo"><img src="../logo.png" alt="SMAJ STORE"><span>SMAJ STORE</span></div>
+        </div>
+        <div class="header-right">
+            <a href="cart.html" class="header-icon cart-icon"><i class="fas fa-shopping-cart"></i><span class="cart-count" id="cartCount">0</span></a>
+        </div>
+    </header>
+    <div class="page-container">
+        <div class="vendor-header">
+            <div class="vendor-banner">TZ</div>
+            <div class="vendor-details">
+                <h1>TechZone Store <span class="verified-badge"><i class="fas fa-check"></i> Verified</span></h1>
+                <p>Premium electronics and gadgets</p>
+                <div class="vendor-stats-bar">
+                    <div class="vendor-stat"><div class="vendor-stat-value">2,340</div><div class="vendor-stat-label">Sales</div></div>
+                    <div class="vendor-stat"><div class="vendor-stat-value">156</div><div class="vendor-stat-label">Products</div></div>
+                    <div class="vendor-stat"><div class="vendor-stat-value">4.9</div><div class="vendor-stat-label">Rating</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="products-grid" id="vendorProducts"></div>
+    </div>
+    <script src="../js/products.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('vendorProducts');
+            if (container) container.innerHTML = products.slice(0,8).map(p => createProductCard(p)).join('');
+        });
+    </script>
+</body>
+</html>
