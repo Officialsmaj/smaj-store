@@ -194,11 +194,6 @@ img {
     position: relative;
 }
 
-.wallet-status > i {
-    margin-right: 8px;
-    color: var(--text-secondary);
-}
-
 .wallet-text {
     padding: 8px 16px;
     background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
