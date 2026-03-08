@@ -302,10 +302,7 @@ function addToCartFromCard(productId) {
     }
 }
 
-// Toggle wishlist
-function toggleWishlist(productId) {
-    showNotification('Added to wishlist!', 'success');
-}
+
 
 // Quick view
 function quickView(productId) {

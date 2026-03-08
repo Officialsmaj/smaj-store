@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist | SMAJ STORE</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="../logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+        .page-header h2 { font-size: 24px; font-weight: 700; }
+        .wishlist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+        .wishlist-card { background: var(--bg-white); border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; transition: var(--transition-fast); }
+        .wishlist-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+        .wishlist-image { position: relative; height: 200px; }
+        .wishlist-image img { width: 100%; height: 100%; object-fit: cover; }
+        .remove-wishlist { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: var(--bg-white); border-radius: var(--radius-md); color: var(--danger-color); cursor: pointer; transition: var(--transition-fast); }
+        .remove-wishlist:hover { background: var(--danger-color); color: var(--text-white); }
+        .wishlist-info { padding: 16px; }
+        .wishlist-category { font-size: 12px; color: var(--primary-color); font-weight: 500; text-transform: uppercase; margin-bottom: 4px; }
+        .wishlist-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .wishlist-title a { color: var(--text-primary); transition: var(--transition-fast); }
+        .wishlist-title a:hover { color: var(--primary-color); }
+        .wishlist-seller { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 13px; color: var(--text-secondary); }
+        .wishlist-price { font-size: 20px; font-weight: 700; color: var(--primary-color); margin-bottom: 12px; }
+        .wishlist-actions { display: flex; gap: 8px; }
+        .btn-add-cart { flex: 1; padding: 10px; background: var(--primary-color); color: var(--text-white); border-radius: var(--radius-md); font-size: 14px; font-weight: 600; text-align: center; }
+        .btn-add-cart:hover { background: var(--primary-dark); }
+        .empty-wishlist { text-align: center; padding: 80px 20px; }
+        .empty-wishlist i { font-size: 64px; color: var(--text-light); margin-bottom: 24px; }
+        .empty-wishlist h3 { font-size: 24px; margin-bottom: 12px; }
+        .empty-wishlist p { color: var(--text-secondary); margin-bottom: 24px; }
+    </style>
+</head>
+<body>
+    <header class="ecosystem-header">
+        <div class="header-left">
+            <a href="../index.html" class="back-to-hub"><i class="fas fa-arrow-left"></i><span>Back to PI HUB</span></a>
+            <div class="store-logo"><img src="../logo.png" alt="SMAJ STORE"><span>SMAJ STORE</span></div>
+        <div class="header-right">
+            <div class="wallet-status" id="walletStatus">
+                <span class="wallet-text" onclick="toggleWalletDropdown()"><i class="fas fa-wallet"></i><span>Connect Wallet</span>
+                <div class="wallet-dropdown" id="walletDropdown">
+                    <div class="wallet-info" id="walletInfo" style="display:none"><div class="wallet-balance"><span class="balance-label">Balance</span><span class="balance-amount" id="walletBalance">0.00 Pi</span></div><button class="disconnect-btn" onclick="disconnectWallet()">Disconnect</button></div>
+                    <button class="connect-btn" onclick="connectWallet()">Connect Pi Wallet</button>
+                </div>
+            <a href="cart.html" class="header-icon cart-icon"><i class="fas fa-shopping-cart"></i><span class="cart-count" id="cartCount">0</span></a>
+            <div class="user-profile" onclick="toggleProfileMenu()"><div class="profile-avatar"><i class="fas fa-user"></i></div>
+        </div>
+    </header>
+
+    <div class="page-container">
+        <div class="page-header">
+            <h2>My Wishlist</h2>
+            <span id="wishlistCount" style="color:var(--text-secondary)">0 items</span>
+        </div>
+        
+        <div class="wishlist-grid" id="wishlistGrid"></div>
+        
+        <div class="empty-wishlist" id="emptyWishlist" style="display:none">
+            <i class="fas fa-heart"></i>
+            <h3>Your Wishlist is Empty</h3>
+            <p>Save items you love by clicking the heart icon on any product.</p>
+            <a href="../index.html" class="btn btn-primary">Start Shopping</a>
+        </div>
+
+    <script src="../js/products.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        let wishlist = JSON.parse(localStorage.getItem('smaj_wishlist') || '[]');
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            checkEcosystemSession();
+            initCart();
+            renderWishlist();
+        });
+        
+        function renderWishlist() {
+            const grid = document.getElementById('wishlistGrid');
+            const empty = document.getElementById('emptyWishlist');
+            document.getElementById('wishlistCount').textContent = wishlist.length + ' items';
+            
+            if (wishlist.length === 0) {
+                grid.style.display = 'none';
+                empty.style.display = 'block';
+                return;
+            }
+            
+            grid.style.display = 'grid';
+            empty.style.display = 'none';
+            
+            grid.innerHTML = wishlist.map(item => `
+                <div class="wishlist-card">
+                    <div class="wishlist-image">
+                        <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/400x300?text=Product'">
+                        <button class="remove-wishlist" onclick="removeFromWishlist(${item.id})"><i class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="wishlist-info">
+                        <div class="wishlist-category">${item.category}</div>
+                        <h3 class="wishlist-title"><a href="product-detail.html?id=${item.id}">${item.name}</a></h3>
+                        <div class="wishlist-seller">
+                            ${item.seller.verified ? '<span class="verified-badge"><i class="fas fa-check"></i></span>' : ''}
+                            ${item.seller.name}
+                        </div>
+                        <div class="wishlist-price">${item.price.toFixed(2)} Pi</div>
+                        <div class="wishlist-actions">
+                            <button class="btn-add-cart" onclick="addToCartFromWishlist(${item.id})"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                        </div>
+                </div>
+            `).join('');
+        }
+        
+        function removeFromWishlist(productId) {
+            wishlist = wishlist.filter(item => item.id !== productId);
+            localStorage.setItem('smaj_wishlist', JSON.stringify(wishlist));
+            renderWishlist();
+            showNotification('Item removed from wishlist', 'info');
+        }
+        
+        function addToCartFromWishlist(productId) {
+            const item = wishlist.find(i => i.id === productId);
+            if (item) {
+                addToCart(item);
+                removeFromWishlist(productId);
+            }
+        }
+        
+        function addToCart(item, quantity = 1) {
+            let cart = JSON.parse(localStorage.getItem('smaj_cart') || '[]');
+            const existing = cart.find(i => i.id === item.id);
+            if (existing) existing.quantity += quantity;
+            else cart.push({ id: item.id, name: item.name, price: item.price, image: item.image, seller: item.seller, quantity: quantity, stock: item.stock });
+            localStorage.setItem('smaj_cart', JSON.stringify(cart));
+            updateCartCount();
+            showNotification(item.name + ' added to cart!', 'success');
+        }
+        
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('smaj_cart') || '[]');
+            const count = cart.reduce((sum, i) => sum + i.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+    </script>
+</body>
+</html>
